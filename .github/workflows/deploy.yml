@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]  # Замените на вашу основную ветку, если это не main
+    branches: ["main"]
   workflow_dispatch:   # Позволяет запускать вручную из интерфейса GitHub
 
 permissions:
@@ -24,11 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm' # или 'yarn', если используете Yarn
+          cache: 'npm'
       - name: Install dependencies
-        run: npm ci # или 'yarn install --frozen-lockfile'
+        run: npm ci
       - name: Build project
-        run: npm run build # или 'yarn build'
+        run: npm run build
+        env:
+          VITE_BASE_URL: /IVAN_TUTOR/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

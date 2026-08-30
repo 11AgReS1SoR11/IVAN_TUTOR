@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
                 <div className="w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full bg-gradient-to-br from-[#f59e0b] to-[#d97706] p-1.5 mx-auto shadow-2xl">
                   <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden border-4 border-white">
                     <img
-                      src="/Ava.png"
+                      src="/IVAN_TUTOR/Ava.png"
                       alt="Басалаев Иван"
                       className="w-full h-full object-cover"
                     />

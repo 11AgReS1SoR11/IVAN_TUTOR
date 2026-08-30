@@ -56,7 +56,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
         {/* Имя репетитора */}
         <div className="text-center">
           <p className="text-2xl font-bold text-[#1a2a4a]">{contactInfo.name}</p>
-          <p className="text-gray-500 text-sm">Репетитор по химии</p>
+          <p className="text-gray-500 text-sm">Репетитор по химии и математике</p>
         </div>
 
         {/* Телефон */}
