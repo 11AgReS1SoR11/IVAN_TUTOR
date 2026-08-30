@@ -26,11 +26,6 @@ const subjectLabels: Record<Subject, string> = {
   math: '📐 Математика',
 }
 
-// const subjectEmojis: Record<Subject, string> = {
-//   chemistry: '🧪',
-//   math: '📐',
-// }
-
 const formatLabels: Record<Format, string> = {
   individual: '👤 Индивидуально',
   group: '👨‍👩‍👧‍👦 Мини-группа',
@@ -147,7 +142,6 @@ const Calculator: React.FC = () => {
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
-                      {/* <span className="text-2xl block mb-1">{subjectEmojis[s]}</span>*/}
                       <span className={`text-2xl font-medium block ${subject === s ? 'text-[#1a2a4a]' : 'text-gray-600'}`}>
                         {subjectLabels[s]}
                       </span>
