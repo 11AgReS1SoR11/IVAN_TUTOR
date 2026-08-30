@@ -7,7 +7,7 @@ import ContactModal from '@/components/ui/ContactModal'
 interface ServiceCardProps {
   title: string
   icon: string
-  exams: string[]
+  exams: Array<{ label: string; isSoon?: boolean }>
   price: string
   color: string
   delay: number
@@ -38,14 +38,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       <div className={`p-6 ${color} text-white`}>
         <div className="text-5xl mb-3">{icon}</div>
         <h3 className="text-2xl font-bold">{title}</h3>
+        <p className="text-sm opacity-80 mt-1">Подготовка к экзаменам</p>
       </div>
 
       <div className="p-6">
-        <ul className="space-y-2 mb-6">
+        <ul className="space-y-2.5 mb-6">
           {exams.map((exam, index) => (
             <li key={index} className="flex items-center gap-2 text-gray-700">
               <span className="text-[#f59e0b]">▸</span>
-              {exam}
+              <span>{exam.label}</span>
+              {exam.isSoon && (
+                <span className="ml-2 text-[10px] font-bold uppercase bg-[#f59e0b]/20 text-[#f59e0b] px-2 py-0.5 rounded-full">
+                  Скоро
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -77,15 +83,25 @@ const Services: React.FC = () => {
     {
       title: 'Химия',
       icon: '🧪',
-      exams: ['ОГЭ', 'ЕГЭ', 'Повышение успеваемости'],
+      exams: [
+        { label: 'ОГЭ' },
+        { label: 'ЕГЭ' },
+        { label: 'Повышение успеваемости' },
+        { label: 'Подготовка к олимпиадам', isSoon: true },
+      ],
       price: 'от 1 500 ₽',
-      color: 'bg-gradient-to-br from-[#1a2a4a] to-[#2a3a5a]',
+      color: 'bg-gradient-to-br from-[#f59e0b] to-[#d97706]',
       subject: 'chemistry' as const,
     },
     {
       title: 'Математика',
       icon: '📐',
-      exams: ['ОГЭ', 'ЕГЭ (база)', 'ЕГЭ (профиль)', 'Подготовка к ДВИ'],
+      exams: [
+        { label: 'ОГЭ' },
+        { label: 'ЕГЭ (база)' },
+        { label: 'ЕГЭ (профиль)' },
+        { label: 'Подготовка к олимпиадам', isSoon: true },
+      ],
       price: 'от 1 500 ₽',
       color: 'bg-gradient-to-br from-[#f59e0b] to-[#d97706]',
       subject: 'math' as const,
@@ -99,7 +115,7 @@ const Services: React.FC = () => {
 
   return (
     <>
-      <section ref={ref} className="py-16 md:py-24 bg-gray-50">
+      <section ref={ref} className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -107,10 +123,16 @@ const Services: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a2a4a] mb-3">
-              Выбери свой предмет и формат
+            <motion.div
+              initial={{ width: 0 }}
+              animate={isInView ? { width: '80px' } : { width: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="h-1 bg-[#f59e0b] mx-auto mb-4 rounded-full"
+            />
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a2a4a] mb-3">
+              Выбери свой предмет
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
               Индивидуальная программа под твои цели и уровень подготовки
             </p>
           </motion.div>
@@ -131,11 +153,11 @@ const Services: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-8 max-w-2xl mx-auto"
+            className="mt-10 max-w-2xl mx-auto"
           >
-            <div className="bg-[#f59e0b] bg-opacity-10 border-2 border-[#f59e0b] border-dashed rounded-xl p-4 text-center">
+            <div className="bg-[#f59e0b] bg-opacity-10 border-2 border-[#f59e0b] border-dashed rounded-xl p-5 text-center hover:bg-opacity-15 transition-all duration-300">
               <p className="text-[#1a2a4a] font-semibold text-lg">
-                🎯 Скидка <span className="text-[#f59e0b] font-bold">10%</span> при оплате абонемента на 8 занятий
+                Скидка <span className="text-[#f59e0b] font-bold">10%</span> при оплате абонемента на 8 занятий
               </p>
             </div>
           </motion.div>

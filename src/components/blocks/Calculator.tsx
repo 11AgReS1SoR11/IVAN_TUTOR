@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button'
 import ContactModal from '@/components/ui/ContactModal'
 
 type Subject = 'chemistry' | 'math'
-type Format = 'individual' | 'pair' | 'group'
+type Format = 'individual' | 'group'
 
 interface PricingConfig {
   subject: Subject
@@ -16,10 +16,8 @@ interface PricingConfig {
 
 const pricingConfigs: PricingConfig[] = [
   { subject: 'chemistry', format: 'individual', pricePerHour: 1500, label: 'Индивидуально' },
-  { subject: 'chemistry', format: 'pair', pricePerHour: 1100, label: 'В паре' },
   { subject: 'chemistry', format: 'group', pricePerHour: 800, label: 'Мини-группа (3-5 чел)' },
   { subject: 'math', format: 'individual', pricePerHour: 1500, label: 'Индивидуально' },
-  { subject: 'math', format: 'pair', pricePerHour: 1100, label: 'В паре' },
   { subject: 'math', format: 'group', pricePerHour: 800, label: 'Мини-группа (3-5 чел)' },
 ]
 
@@ -35,7 +33,6 @@ const subjectEmojis: Record<Subject, string> = {
 
 const formatLabels: Record<Format, string> = {
   individual: '👤 Индивидуально',
-  pair: '👥 В паре',
   group: '👨‍👩‍👧‍👦 Мини-группа',
 }
 
@@ -70,22 +67,62 @@ const Calculator: React.FC = () => {
     setIsBookingOpen(true)
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.6,
+        ease: 'easeOut',
+      } 
+    },
+  }
+
   return (
     <>
-      <section ref={ref} className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+      <section ref={ref} className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50/50">
         <Container>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="text-center mb-14"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a2a4a] mb-3">
+            <motion.div
+              variants={itemVariants}
+              className="flex justify-center mb-4"
+            >
+              <motion.div
+                initial={{ width: 0 }}
+                animate={isInView ? { width: '80px' } : { width: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="h-1 bg-[#f59e0b] rounded-full"
+              />
+            </motion.div>
+            <motion.h2
+              variants={itemVariants}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a2a4a] mb-3"
+            >
               Рассчитай стоимость занятий
-            </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p
+              variants={itemVariants}
+              className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto"
+            >
               Выбери параметры и узнай цену прямо сейчас
-            </p>
+            </motion.p>
           </motion.div>
 
           <motion.div
@@ -111,8 +148,8 @@ const Calculator: React.FC = () => {
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
-                      <span className="text-2xl block mb-1">{subjectEmojis[s]}</span>
-                      <span className={`text-sm font-medium ${subject === s ? 'text-[#1a2a4a]' : 'text-gray-600'}`}>
+                      {/* <span className="text-2xl block mb-1">{subjectEmojis[s]}</span>*/}
+                      <span className={`text-2xl font-medium block ${subject === s ? 'text-[#1a2a4a]' : 'text-gray-600'}`}>
                         {subjectLabels[s]}
                       </span>
                     </button>
@@ -125,8 +162,8 @@ const Calculator: React.FC = () => {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Формат занятий
                 </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {(['individual', 'pair', 'group'] as Format[]).map((f) => (
+                <div className="grid grid-cols-2 gap-3">
+                  {(['individual', 'group'] as Format[]).map((f) => (
                     <button
                       key={f}
                       onClick={() => setFormat(f)}
@@ -245,7 +282,7 @@ const Calculator: React.FC = () => {
                   className="w-full text-base"
                   onClick={handleBook}
                 >
-                  🔥 Записаться за {discountedPrice.toLocaleString()} ₽
+                  📞 Связаться с Иваном
                 </Button>
                 <p className="text-center text-xs text-gray-400 mt-2">
                   * Первое занятие — бесплатно!

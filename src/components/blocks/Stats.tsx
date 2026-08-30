@@ -15,30 +15,30 @@ interface StatItem {
 const statsData: StatItem[] = [
   {
     id: '1',
-    value: 90,
-    suffix: '+',
-    label: 'Средний балл ЕГЭ по химии',
-    icon: '🧪',
-  },
-  {
-    id: '2',
-    value: 85,
-    suffix: '+',
-    label: 'Средний балл ЕГЭ по математике',
-    icon: '📐',
-  },
-  {
-    id: '3',
-    value: 120,
+    value: 15,
     label: 'Всего подготовленных учеников',
     icon: '👨‍🎓',
   },
   {
-    id: '4',
+    id: '2',
+    value: 3,
+    suffix: '+',
+    label: 'Лет опыта работы',
+    icon: '⏳',
+  },
+  {
+    id: '3',
     value: 100,
     suffix: '%',
     label: 'Сдача ОГЭ без «троек»',
     icon: '🏆',
+  },
+  {
+    id: '4',
+    value: 80,
+    suffix: '+',
+    label: 'Средний балл учеников на ЕГЭ',
+    icon: '📈',
   },
 ]
 
@@ -47,7 +47,7 @@ const Stats: React.FC = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
+    <section ref={ref} className="py-16 md:py-20 bg-white">
       <Container>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -55,7 +55,7 @@ const Stats: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-4xl font-bold text-center text-[#1a2a4a] mb-12"
         >
-          Мои ученики поступают в топовые вузы
+          Мои результаты в цифрах
         </motion.h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
@@ -93,7 +93,7 @@ const StatCard: React.FC<StatCardProps> = ({ stat, isInView, delay }) => {
       initial={{ opacity: 0, y: 30, scale: 0.9 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
       transition={{ duration: 0.5, delay }}
-      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 text-center border border-gray-100"
+      className="bg-gray-50 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 p-6 text-center border border-gray-100"
     >
       <div className="text-4xl md:text-5xl mb-3">{stat.icon}</div>
       <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#f59e0b] mb-1">

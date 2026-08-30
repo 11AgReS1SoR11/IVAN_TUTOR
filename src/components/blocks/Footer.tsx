@@ -3,11 +3,18 @@ import { motion, useInView } from 'framer-motion'
 import Container from '@/components/ui/Container'
 import Button from '@/components/ui/Button'
 import ContactModal from '@/components/ui/ContactModal'
+import {
+  TelegramIcon,
+  YouTubeIcon,
+  TikTokIcon,
+  VKIcon,
+  WhatsAppIcon,
+} from '@/components/ui/SocialIcons'
 
 interface SocialLink {
   id: string
   name: string
-  icon: string
+  icon: React.ReactNode
   url: string
   color: string
 }
@@ -16,30 +23,37 @@ const socialLinks: SocialLink[] = [
   {
     id: 'telegram',
     name: 'Telegram',
-    icon: '📱',
+    icon: <TelegramIcon className="w-6 h-6" />,
     url: '#',
-    color: 'hover:bg-blue-500',
+    color: 'hover:bg-[#0088cc]',
   },
   {
     id: 'whatsapp',
     name: 'WhatsApp',
-    icon: '💬',
+    icon: <WhatsAppIcon className="w-6 h-6" />,
     url: '#',
-    color: 'hover:bg-green-500',
+    color: 'hover:bg-[#25d366]',
   },
   {
     id: 'vk',
     name: 'VK',
-    icon: '💙',
+    icon: <VKIcon className="w-6 h-6" />,
     url: '#',
-    color: 'hover:bg-blue-400',
+    color: 'hover:bg-[#4a76a8]',
   },
   {
     id: 'youtube',
     name: 'YouTube',
-    icon: '▶️',
+    icon: <YouTubeIcon className="w-6 h-6" />,
     url: '#',
-    color: 'hover:bg-red-500',
+    color: 'hover:bg-[#ff0000]',
+  },
+  {
+    id: 'tiktok',
+    name: 'TikTok',
+    icon: <TikTokIcon className="w-6 h-6" />,
+    url: '#',
+    color: 'hover:bg-[#010101]',
   },
 ]
 
@@ -48,79 +62,105 @@ const Footer: React.FC = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [isBookingOpen, setIsBookingOpen] = useState(false)
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.6,
+        ease: 'easeOut',
+      } 
+    },
+  }
+
   return (
     <>
       <footer ref={ref} className="bg-[#1a2a4a]">
         {/* Финальный призыв */}
         <div className="relative overflow-hidden">
-          {/* Декоративный фон */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-0 left-0 text-8xl">∫</div>
-            <div className="absolute bottom-0 right-0 text-8xl">🧪</div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl">
-              π
-            </div>
-          </div>
-
           <Container className="relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
+              variants={containerVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
               className="py-16 md:py-20 text-center"
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Не откладывай подготовку на последний вечер
-              </h2>
-
-              <p className="text-gray-300 text-lg mb-6">
-                Осталось мест на этот месяц:{' '}
-                <span className="text-[#f59e0b] font-bold text-2xl">2 из 5</span>
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-white border border-white/10"
-                >
-                  <div className="text-3xl mb-2">🎁</div>
-                  <p className="text-sm font-medium">Бесплатный пробный урок</p>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-white border border-white/10"
-                >
-                  <div className="text-3xl mb-2">📋</div>
-                  <p className="text-sm font-medium">Диагностика знаний в подарок</p>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.3 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-white border border-white/10"
-                >
-                  <div className="text-3xl mb-2">📚</div>
-                  <p className="text-sm font-medium">Чек-лист всех правил по химии</p>
-                </motion.div>
-              </div>
-
+              {/* Заголовок с золотой линией */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                variants={itemVariants}
+                className="flex justify-center mb-4"
+              >
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={isInView ? { width: '80px' } : { width: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="h-1 bg-[#f59e0b] rounded-full"
+                />
+              </motion.div>
+
+              <motion.h2
+                variants={itemVariants}
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4"
+              >
+                Не откладывай подготовку на последний вечер
+              </motion.h2>
+
+              <motion.p
+                variants={itemVariants}
+                className="text-gray-300 text-lg md:text-xl mb-6"
+              >
+                Осталось мест на этот месяц:{' '}
+                <span className="text-[#f59e0b] font-bold text-3xl">2 из 5</span>
+              </motion.p>
+
+              {/* Бонусы */}
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10"
+              >
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 text-white border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="text-4xl mb-2">🎁</div>
+                  <p className="text-sm font-medium">Бесплатный пробный урок</p>
+                  <p className="text-xs text-gray-400 mt-1">Познакомимся и определим уровень</p>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 text-white border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="text-4xl mb-2">📋</div>
+                  <p className="text-sm font-medium">Диагностика знаний</p>
+                  <p className="text-xs text-gray-400 mt-1">Выявим пробелы и составим план</p>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 text-white border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="text-4xl mb-2">📚</div>
+                  <p className="text-sm font-medium">Чек-лист по химии</p>
+                  <p className="text-xs text-gray-400 mt-1">Все правила для ОГЭ и ЕГЭ</p>
+                </div>
+              </motion.div>
+
+              {/* Кнопка */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 <Button
                   size="lg"
-                  className="animate-pulse-glow text-base md:text-lg px-8 md:px-12"
+                  className="animate-pulse-glow text-base md:text-lg px-8 md:px-12 py-4"
                   onClick={() => setIsBookingOpen(true)}
                 >
-                  🔥 Записаться на пробный урок
+                  📞 Связаться с Иваном
                 </Button>
               </motion.div>
             </motion.div>
@@ -130,38 +170,57 @@ const Footer: React.FC = () => {
         {/* Нижняя часть с контактами */}
         <div className="border-t border-white/10">
           <Container>
-            <div className="py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="py-8 flex flex-col md:flex-row justify-between items-center gap-6">
+              {/* Информация о репетиторе */}
               <div className="text-center md:text-left">
-                <p className="text-white font-bold text-lg">Иван Иванов</p>
-                <p className="text-gray-400 text-sm">Репетитор по химии и математике</p>
+                <p className="text-white font-bold text-lg">Басалаев Иван</p>
+                <p className="text-gray-400 text-sm">Репетитор по химии</p>
               </div>
 
-              <div className="flex flex-wrap justify-center gap-4">
+              {/* Соцсети */}
+              <div className="flex flex-wrap justify-center gap-3">
                 {socialLinks.map((social) => (
                   <motion.a
                     key={social.id}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -3, scale: 1.05 }}
-                    className={`w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white text-2xl transition-all duration-300 ${social.color} hover:scale-110`}
+                    whileHover={{ y: -3, scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white transition-all duration-300 ${social.color} hover:text-white hover:bg-opacity-100`}
+                    title={social.name}
                   >
                     {social.icon}
                   </motion.a>
                 ))}
               </div>
 
-              <div className="text-center md:text-right text-sm text-gray-400">
-                <p>📞 <a href="tel:+79991234567" className="hover:text-[#f59e0b] transition-colors">+7 (999) 123-45-67</a></p>
-                <p>✉️ <a href="mailto:ivan@tutor.ru" className="hover:text-[#f59e0b] transition-colors">ivan@tutor.ru</a></p>
+              {/* Контакты */}
+              <div className="text-center md:text-right text-sm">
+                <p className="text-gray-400">
+                  📞{' '}
+                  <a 
+                    href="tel:+79991234567" 
+                    className="text-white hover:text-[#f59e0b] transition-colors font-medium"
+                  >
+                    +7 (999) 123-45-67
+                  </a>
+                </p>
+                <p className="text-gray-400 mt-1">
+                  ✉️{' '}
+                  <a 
+                    href="mailto:ivan@tutor.ru" 
+                    className="text-white hover:text-[#f59e0b] transition-colors font-medium"
+                  >
+                    ivan@tutor.ru
+                  </a>
+                </p>
               </div>
             </div>
 
+            {/* Копирайт */}
             <div className="border-t border-white/5 py-4 text-center text-xs text-gray-500">
-              <p>© 2026 Иван Иванов. Все права защищены.</p>
-              <p className="mt-1">
-                <a href="#" className="hover:text-[#f59e0b] transition-colors">Политика конфиденциальности</a>
-              </p>
+              <p>© 2026 Басалаев Иван. Все права защищены.</p>
             </div>
           </Container>
         </div>
