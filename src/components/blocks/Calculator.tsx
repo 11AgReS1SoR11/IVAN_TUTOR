@@ -26,10 +26,10 @@ const subjectLabels: Record<Subject, string> = {
   math: '📐 Математика',
 }
 
-const subjectEmojis: Record<Subject, string> = {
-  chemistry: '🧪',
-  math: '📐',
-}
+// const subjectEmojis: Record<Subject, string> = {
+//   chemistry: '🧪',
+//   math: '📐',
+// }
 
 const formatLabels: Record<Format, string> = {
   individual: '👤 Индивидуально',
@@ -84,8 +84,7 @@ const Calculator: React.FC = () => {
       opacity: 1, 
       y: 0, 
       transition: { 
-        duration: 0.6,
-        ease: 'easeOut',
+        duration: 0.6
       } 
     },
   }

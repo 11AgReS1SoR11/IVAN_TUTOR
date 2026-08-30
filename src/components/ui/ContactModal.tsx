@@ -3,8 +3,8 @@ import Modal from './Modal'
 import {
   TelegramIcon,
   WhatsAppIcon,
-  VKIcon,
-  MAXIcon,
+  // VKIcon,
+  // MAXIcon,
 } from '@/components/ui/SocialIcons'
 
 interface ContactModalProps {

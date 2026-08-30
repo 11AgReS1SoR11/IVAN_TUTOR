@@ -77,7 +77,7 @@ const Services: React.FC = () => {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [isBookingOpen, setIsBookingOpen] = useState(false)
-  const [selectedSubject, setSelectedSubject] = useState<'chemistry' | 'math'>('chemistry')
+  const [_, setSelectedSubject] = useState<'chemistry' | 'math'>('chemistry')
 
   const services = [
     {

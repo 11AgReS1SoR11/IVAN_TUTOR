@@ -54,7 +54,6 @@ const About: React.FC = () => {
       y: 0, 
       transition: { 
         duration: 0.6,
-        ease: 'easeOut',
       } 
     },
   }
@@ -67,7 +66,6 @@ const About: React.FC = () => {
       scale: 1,
       transition: { 
         duration: 0.5,
-        ease: 'easeOut',
       } 
     },
   }
@@ -87,7 +85,7 @@ const About: React.FC = () => {
               <motion.div
                 initial={{ width: 0 }}
                 animate={isInView ? { width: '80px' } : { width: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
+                transition={{ duration: 0.8, delay: 0.3 }}
                 className="h-1 bg-[#f59e0b] mx-auto mb-4 rounded-full"
               />
               <motion.h2
