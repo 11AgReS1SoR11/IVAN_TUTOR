@@ -66,7 +66,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           className="w-full"
           onClick={() => onBook(subject)}
         >
-          Хочу на {title.toLowerCase()}
+          Хочу на {title.toLowerCase() === 'химия' ? 'химию' : title.toLowerCase().slice(0, -1) + 'y'}
         </Button>
       </div>
     </motion.div>
@@ -115,7 +115,7 @@ const Services: React.FC = () => {
 
   return (
     <>
-      <section ref={ref} className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
+      <section ref={ref} className="py-16 md:py-24 bg-transparent">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 30 }}

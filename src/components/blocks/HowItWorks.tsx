@@ -69,7 +69,7 @@ const HowItWorks: React.FC = () => {
   }
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50/50">
+    <section ref={ref} className="py-16 md:py-24 bg-white/30">
       <Container>
         <motion.div
           variants={containerVariants}

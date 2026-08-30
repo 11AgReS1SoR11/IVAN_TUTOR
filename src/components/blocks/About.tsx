@@ -74,7 +74,7 @@ const About: React.FC = () => {
 
   return (
     <>
-      <section ref={ref} className="py-16 md:py-24 bg-gradient-to-b from-blue-50/50 to-white">
+      <section ref={ref} className="py-16 md:py-24 bg-white/40">
         <Container>
           <motion.div
             variants={containerVariants}
@@ -161,17 +161,21 @@ const About: React.FC = () => {
               className="text-center mt-12"
             >
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-[#f59e0b] text-[#f59e0b] hover:bg-[#f59e0b] hover:text-white transition-all duration-300"
+                  disabled
+                  className="border-[#f59e0b] text-[#f59e0b] hover:bg-[#f59e0b] hover:text-white transition-all duration-300 opacity-60 cursor-not-allowed relative"
                   onClick={() => setIsDiplomaModalOpen(true)}
                 >
-                  📜 Посмотреть дипломы и сертификаты
+                  Посмотреть дипломы и сертификаты
+                  <span className="absolute -top-2 -right-2 bg-[#f59e0b] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    Скоро
+                  </span>
                 </Button>
               </motion.div>
               <motion.p

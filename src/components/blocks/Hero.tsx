@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
 
   return (
     <>
-      <section className="min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
+      <section className="min-h-screen flex items-center bg-transparent relative overflow-hidden">
         <Container className="relative z-10 py-12">
           <motion.div
             variants={containerVariants}
@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
                 transition={{ delay: 0.6, type: 'spring' }}
                 className="mt-4 bg-[#f59e0b] text-[#1a2a4a] font-bold text-lg md:text-xl px-6 py-2.5 rounded-full shadow-lg"
               >
-                🧪 Репетитор по химии и математике
+                Репетитор по химии и математике
               </motion.div>
 
               {/* Соцсети под фото */}
@@ -115,7 +115,7 @@ const Hero: React.FC = () => {
                 variants={itemVariants}
                 className="text-3xl md:text-4xl text-[#1a2a4a] font-medium mb-5"
               >
-                Подготовлю к ОГЭ и ЕГЭ по химии на{' '}
+                Подготовлю к ОГЭ и ЕГЭ по химии и математике на{' '}
                 <span className="text-[#f59e0b] font-bold">высокий балл</span>
               </motion.p>
 
@@ -163,7 +163,7 @@ const Hero: React.FC = () => {
                 className="flex flex-wrap justify-center lg:justify-start gap-8 mt-8 text-base text-gray-500"
               >
                 <span className="flex items-center gap-2">✅ Онлайн-занятия</span>
-                <span className="flex items-center gap-2">✅ Студент МАГУ</span>
+                <span className="flex items-center gap-2">✅ Индивидуальный подход</span>
                 <span className="flex items-center gap-2">✅ Первое занятие бесплатно</span>
               </motion.div>
             </motion.div>

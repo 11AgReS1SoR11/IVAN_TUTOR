@@ -12,7 +12,7 @@ import Footer from '@/components/blocks/Footer'
 
 const App: React.FC = () => {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-gradient-to-b from-blue-50/30 via-white to-gray-50/50">
       <Hero />
       <Stats />
       <About />
